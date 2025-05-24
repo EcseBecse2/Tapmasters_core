@@ -52,7 +52,7 @@
   <repositories>
       <repository>
           <id>placeholderapi</id>
-          <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+          <url>https://jitpack.io/https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
       </repository>
       <repository>
           <id>spigotmc-repo</id>

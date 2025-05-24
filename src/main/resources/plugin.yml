@@ -1,0 +1,19 @@
+name: Tapmasters_core
+version: '${project.version}'
+main: org.egyse.tapmasters_core.Tapmasters_core
+api-version: '1.19'
+commands:
+  tapmaster:
+    aliases:
+      - tapmasters
+  account:
+    aliases:
+      - profile
+  sell:
+    aliases:
+      - sellclicks
+  booster:
+    aliases:
+      - boosters
+  prestige:
+    aliases: []

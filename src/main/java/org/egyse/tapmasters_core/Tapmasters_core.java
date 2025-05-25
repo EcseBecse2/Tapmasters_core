@@ -52,6 +52,8 @@ public final class Tapmasters_core extends JavaPlugin {
     public CurrencyFormatter currencyFormatter;
     public PrestigeUtil prestigeUtil;
     public GgEventUtil ggEventUtil;
+    public PlaceholderAPIUtil placeholderAPIUtil;
+    public LeaderBoardUtil leaderBoardUtil;
 
     @Override
     public void onEnable() {
@@ -66,6 +68,8 @@ public final class Tapmasters_core extends JavaPlugin {
         currencyFormatter = new CurrencyFormatter();
         prestigeUtil = new PrestigeUtil();
         ggEventUtil = new GgEventUtil();
+        placeholderAPIUtil = new PlaceholderAPIUtil();
+        leaderBoardUtil = new LeaderBoardUtil();
 
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new QuitListener(), this);
@@ -80,6 +84,12 @@ public final class Tapmasters_core extends JavaPlugin {
         getCommand("booster").setExecutor(new BoosterCommand());
         getCommand("prestige").setExecutor(new PrestigeCommand());
 
+        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            placeholderAPIUtil.register();
+            System.out.println("Placeholders registered.");
+        }
+
+
         boosterUtil.startBoosterTimer();
         autoSaveData();
     }
@@ -88,6 +98,10 @@ public final class Tapmasters_core extends JavaPlugin {
     public void onDisable() {
         localDataManager.saveToDatabase(true);
         dataManager.disconnect();
+        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            placeholderAPIUtil.unregister();
+            System.out.println("Placeholders unregistered.");
+        }
     }
 
     public void autoSaveData() {

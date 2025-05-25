@@ -2,6 +2,8 @@ name: Tapmasters_core
 version: '1.0'
 main: org.egyse.tapmasters_core.Tapmasters_core
 api-version: '1.19'
+softdepend:
+  - PlaceholderAPI
 commands:
   tapmaster:
     aliases:

@@ -50,7 +50,7 @@ public class GgEventUtil implements Listener {
                 pl.localDataManager.updateOnlineUser(user)
         );
 
-        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&fYou just received &c200 " + Currency.GEM + "&f."));
+        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&fYou just received &c200 " + Currency.GEM + "s&f."));
     }
 
     private void timeStop() {

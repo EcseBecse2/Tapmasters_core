@@ -89,6 +89,10 @@ public final class Tapmasters_core extends JavaPlugin {
             System.out.println("Placeholders registered.");
         }
 
+        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+            localDataManager.userJoined(p);
+            clickerGuiUtil.playerJoined(p);
+        }
 
         boosterUtil.startBoosterTimer();
         autoSaveData();

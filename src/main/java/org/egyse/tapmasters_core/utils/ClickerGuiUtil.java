@@ -322,7 +322,7 @@ public class ClickerGuiUtil implements Listener {
         }
 
         // Tokens (1-10000 roll)
-        if(Math.random() * 10000 < event.getTokenChance()) {
+        if(Math.random() * 100 < event.getTokenChance()) {
             user.setToken(user.getToken() + event.calculateTokenTotal());
         }
 

@@ -18,7 +18,7 @@ public class ClickEvent extends Event {
 
     // Chances (default to 1.0)
     private double gemChance = 1.0;
-    private double tokenChance = 1.0;
+    private double tokenChance = 0.01;
 
     public ClickEvent(Player player) {
         this.player = player;
@@ -69,7 +69,7 @@ public class ClickEvent extends Event {
     }
 
     public double getTokenChance() {
-        return Math.min(tokenChance, 10000.0); // Max 100% (100.00 = 1% when using 1-10000)
+        return Math.min(tokenChance, 100.0); // Max 100%
     }
 
     // ======== Standard Methods ========

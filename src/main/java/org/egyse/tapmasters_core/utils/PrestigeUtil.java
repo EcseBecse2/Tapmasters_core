@@ -53,7 +53,7 @@ public class PrestigeUtil implements Listener {
         lore.add(ChatColor.translateAlternateColorCodes('&', "&e| &fReset &cEVERYTHING &fexcept your"));
         lore.add(ChatColor.translateAlternateColorCodes('&', "&e| &fArmors"));
         lore.add(ChatColor.translateAlternateColorCodes('&', "&e| &fPets"));
-        lore.add(ChatColor.translateAlternateColorCodes('&', "&e| &fWorkers"));
+        //lore.add(ChatColor.translateAlternateColorCodes('&', "&e| &fWorkers"));
         lore.add(ChatColor.translateAlternateColorCodes('&', "&e| &fRaw Clicks"));
         lore.add(ChatColor.translateAlternateColorCodes('&', "&e| &fTokens"));
         lore.add("");
@@ -159,6 +159,7 @@ public class PrestigeUtil implements Listener {
         user.setClick(0);
         user.setMoney(0);
         user.setGem(0);
+        user.setUpgrades(pl.default_upg);
 
         user.setPrestige(user.getPrestige() + 1);
         user.setPrestigePoint(user.getPrestigePoint() + points);

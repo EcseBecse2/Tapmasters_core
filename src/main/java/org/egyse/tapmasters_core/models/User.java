@@ -3,7 +3,6 @@ package org.egyse.tapmasters_core.models;
 import org.egyse.tapmasters_core.Tapmasters_core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

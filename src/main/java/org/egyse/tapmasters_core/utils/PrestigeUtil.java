@@ -17,6 +17,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.egyse.tapmasters_core.API.events.PrestigeEvent;
 import org.egyse.tapmasters_core.Tapmasters_core;
 import org.egyse.tapmasters_core.models.Currency;
+import org.egyse.tapmasters_core.models.Upgrade;
 import org.egyse.tapmasters_core.models.User;
 
 import java.util.ArrayList;
@@ -159,7 +160,11 @@ public class PrestigeUtil implements Listener {
         user.setClick(0);
         user.setMoney(0);
         user.setGem(0);
-        user.setUpgrades(pl.default_upg);
+        List<Upgrade> newUpgrades = pl.default_upg_no_prestige;
+        for (Upgrade upg : user.getUpgrades()) {
+            if (upg.getCurrency() == Currency.PRESTIGE_POINT) newUpgrades.add(upg);
+        }
+        user.setUpgrades(newUpgrades);
 
         user.setPrestige(user.getPrestige() + 1);
         user.setPrestigePoint(user.getPrestigePoint() + points);

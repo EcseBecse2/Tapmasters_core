@@ -44,6 +44,22 @@ public final class Tapmasters_core extends JavaPlugin {
             )
     );
 
+    public List<Upgrade> default_upg_no_prestige = new ArrayList(
+            Arrays.asList(
+                    new Upgrade(Currency.CLICK, 1, 50, 50, 1.5, Currency.MONEY, 1, 0.2, 25),
+                    new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.MONEY, 1, 0.5, 75),
+                    new Upgrade(Currency.CLICK, 1, 500, 500, 2.25, Currency.MONEY, 1, 1, 150),
+                    new Upgrade(Currency.CLICK, 1, 1500, 1500, 2.25, Currency.MONEY, 1, 1.5, 200),
+                    new Upgrade(Currency.CLICK, 1, 3000, 3000, 3, Currency.MONEY, 1, 2, 300),
+                    new Upgrade(Currency.CLICK, 1, 50, 50, 1.5, Currency.GEM, 1, 2, 50),
+                    new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.GEM, 1, 3, 100),
+                    new Upgrade(Currency.CLICK, 1, 750, 750, 2.5, Currency.GEM, 1, 4, 150),
+                    new Upgrade(Currency.GEM, 1, 250, 250, 2, Currency.MONEY, 1, 2, 25),
+                    new Upgrade(Currency.GEM, 1, 1000, 1000, 1.5, Currency.MONEY, 1, 2.5, 100),
+                    new Upgrade(Currency.GEM, 1, 50, 50, 2.5, Currency.GEM, 1, 1.5, 250)
+            )
+    );
+
     public DataManager dataManager;
     public LocalDataManager localDataManager;
     public BoosterUtil boosterUtil;
@@ -94,18 +110,20 @@ public final class Tapmasters_core extends JavaPlugin {
             clickerGuiUtil.playerJoined(p);
         }
 
+        leaderBoardUtil.startRefreshTask();
         boosterUtil.startBoosterTimer();
         autoSaveData();
     }
 
     @Override
     public void onDisable() {
-        localDataManager.saveToDatabase(true);
-        dataManager.disconnect();
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             placeholderAPIUtil.unregister();
             System.out.println("Placeholders unregistered.");
         }
+        leaderBoardUtil.stopRefreshTask();
+        localDataManager.saveToDatabase(true);
+        dataManager.disconnect();
     }
 
     public void autoSaveData() {

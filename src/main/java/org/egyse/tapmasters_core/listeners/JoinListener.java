@@ -10,9 +10,7 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        System.out.println("");
         pl.localDataManager.userJoined(e.getPlayer());
         pl.clickerGuiUtil.playerJoined(e.getPlayer());
-        System.out.println("");
     }
 }

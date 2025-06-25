@@ -26,7 +26,11 @@ public class LeaderBoardUtil {
             public void run() {
                 refreshAllLeaderboards();
             }
-        }, 0, 3 * 60 * 1000);
+        }, 0, 3 * 60 * 20);
+    }
+
+    public void stopRefreshTask() {
+        refreshTimer.cancel();
     }
 
     private void refreshAllLeaderboards() {

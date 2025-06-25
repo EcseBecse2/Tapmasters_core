@@ -1,6 +1,9 @@
 package org.egyse.tapmasters_core.models;
 
+import java.util.UUID;
+
 public class Upgrade {
+    private final UUID uuid;
     private Currency multiplied;
     private int level;
     private int base_cost;
@@ -12,6 +15,7 @@ public class Upgrade {
     private int max_level;
 
     public Upgrade(Currency multiplied, int level, int base_cost, double cost, double cost_multi, Currency currency, double multiplier, double increment_multi, int max_level) {
+        this.uuid = UUID.randomUUID();
         this.multiplied = multiplied;
         this.level = level;
         this.base_cost = base_cost;
@@ -24,6 +28,7 @@ public class Upgrade {
     }
 
     public Upgrade(Upgrade other) {
+        this.uuid = other.uuid;
         this.multiplied = other.multiplied;
         this.level = other.level;
         this.base_cost = other.base_cost;
@@ -33,6 +38,10 @@ public class Upgrade {
         this.multiplier = other.multiplier;
         this.increment_multi = other.increment_multi;
         this.max_level = other.max_level;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public Currency getMultiplied() {

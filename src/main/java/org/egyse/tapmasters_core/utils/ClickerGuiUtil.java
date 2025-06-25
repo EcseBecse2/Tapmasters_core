@@ -395,7 +395,7 @@ public class ClickerGuiUtil implements Listener {
             // Find matching upgrade in user's list
             Upgrade userUpgrade = null;
             for (Upgrade u : user.getUpgrades()) {
-                if (u.getUuid() == templateUpgrade.getUuid()) {
+                if (u.getUuid().toString().equals(templateUpgrade.getUuid().toString())) {
                     userUpgrade = u;
                     break;
                 }

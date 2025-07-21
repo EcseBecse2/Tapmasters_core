@@ -6,11 +6,6 @@ import org.egyse.tapmasters_core.Tapmasters_core;
 import org.egyse.tapmasters_core.models.User;
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class PlaceholderAPIUtil extends PlaceholderExpansion {
     private final Tapmasters_core pl = Tapmasters_core.getInstance();
 
@@ -36,7 +31,7 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // click
         if (identifier.equals("click_raw")) {
-            return String.valueOf(u.getClick());
+            return String.valueOf((int) u.getClick());
         }
         if (identifier.equals("click") || identifier.equals("click_formatted")) {
             return pl.currencyFormatter.formatCurrency(u.getClick());
@@ -44,7 +39,7 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // raw click
         if (identifier.equals("rawclick_raw")) {
-            return String.valueOf(u.getRawClick());
+            return String.valueOf((int) u.getRawClick());
         }
         if (identifier.equals("rawclick") || identifier.equals("rawclick_formatted")) {
             return pl.currencyFormatter.formatCurrency(u.getRawClick());
@@ -52,7 +47,7 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // money
         if (identifier.equals("money_raw")) {
-            return String.valueOf(u.getMoney());
+            return String.valueOf((int) u.getMoney());
         }
         if (identifier.equals("money") || identifier.equals("money_formatted")) {
             return pl.currencyFormatter.formatCurrency(u.getMoney());
@@ -60,7 +55,7 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // gem
         if (identifier.equals("gem_raw")) {
-            return String.valueOf(u.getGem());
+            return String.valueOf((int) u.getGem());
         }
         if (identifier.equals("gem") || identifier.equals("gem_formatted")) {
             return pl.currencyFormatter.formatCurrency(u.getGem());
@@ -68,7 +63,7 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // token
         if (identifier.equals("token_raw")) {
-            return String.valueOf(u.getToken());
+            return String.valueOf((int) u.getToken());
         }
         if (identifier.equals("token") || identifier.equals("token_formatted")) {
             return pl.currencyFormatter.formatCurrency(u.getToken());
@@ -76,7 +71,7 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // prestige
         if (identifier.equals("prestige_raw")) {
-            return String.valueOf(u.getPrestige());
+            return String.valueOf((int) u.getPrestige());
         }
         if (identifier.equals("prestige") || identifier.equals("prestige_formatted")) {
             return pl.currencyFormatter.formatCurrency(u.getPrestige());
@@ -84,7 +79,7 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // prestigepoint
         if (identifier.equals("prestigepoint_raw")) {
-            return String.valueOf(u.getPrestigePoint());
+            return String.valueOf((int) u.getPrestigePoint());
         }
         if (identifier.equals("prestigepoint") || identifier.equals("prestigepoint_formatted")) {
             return pl.currencyFormatter.formatCurrency(u.getPrestigePoint());
@@ -92,23 +87,21 @@ public class PlaceholderAPIUtil extends PlaceholderExpansion {
 
         // prestige progress
         if (identifier.equals("prestige_progress_percent")) {
-            double percent = Math.min(Math.round(((double) u.getClick() / (double) pl.prestigeUtil.price) * 100) / 10.0, 100.0);
-            DecimalFormat df = new DecimalFormat("#0.0");
-            return df.format(percent) + "%";
+            int percent = (int) Math.min(Math.round((u.getClick()*100) / pl.prestigeUtil.getPrice(u)), 100);
+            return percent + "%";
         }
 
         if (identifier.equals("prestige_progress_bar")) {
             String start = "&8[";
             String end = "&8]";
-
             StringBuilder text = new StringBuilder(start);
 
-            double ratio = (double) u.getClick() / (double) pl.prestigeUtil.price;
-            double percent = Math.min(Math.round(ratio * 100 * 10) / 10.0, 100.0);
+            int percent = (int) Math.min(Math.round((u.getClick()*100) / pl.prestigeUtil.getPrice(u)), 100);
 
-            for (int i = 1; i <= 5; i++) {
-                if (percent >= (i - 1) * 20) {
+            for (int i = 0; i < 5; i++) {
+                if (percent >= 20) {
                     text.append("&a▌");
+                    percent -= 20;
                 } else {
                     text.append("&7▌");
                 }

@@ -1,19 +1,16 @@
 package org.egyse.tapmasters_core.utils;
 
 import com.google.gson.JsonSyntaxException;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -25,6 +22,7 @@ import org.egyse.tapmasters_core.API.events.UpgradeEvent;
 import org.egyse.tapmasters_core.Tapmasters_core;
 import org.egyse.tapmasters_core.models.*;
 import com.google.gson.Gson;
+import org.egyse.tapmasters_tutorial.models.StepType;
 
 import java.security.KeyPair;
 import java.util.ArrayList;
@@ -155,6 +153,7 @@ public class ClickerGuiUtil implements Listener {
     String prestigePointUpgradeTitle = "Upgrades (prestige point)";
 
     public boolean isClickItem(ItemStack itemStack) {
+        if (itemStack.getItemMeta() == null) return false;
         PersistentDataContainer pdc = itemStack.getItemMeta().getPersistentDataContainer();
         return pdc.has(clickerItemKey, PersistentDataType.BOOLEAN);
     }
@@ -315,6 +314,7 @@ public class ClickerGuiUtil implements Listener {
         // Clicks
         double clickValue = event.calculateClickTotal();
         user.setClick(user.getClick() + clickValue);
+        pl.tutorial.userManager.logAction(p, StepType.GAIN_CLICK, clickValue);
 
         // Gems (1-100 roll)
         if(Math.random() * 100 < event.getGemChance()) {
@@ -324,6 +324,7 @@ public class ClickerGuiUtil implements Listener {
         // Tokens (1-10000 roll)
         if(Math.random() * 100 < event.getTokenChance()) {
             user.setToken(user.getToken() + event.calculateTokenTotal());
+            pl.tutorial.userManager.logAction(p, StepType.GAIN_TOKEN, event.calculateTokenTotal());
         }
 
         user.setRawClick(user.getRawClick() + 1);
@@ -333,19 +334,49 @@ public class ClickerGuiUtil implements Listener {
         );
     }
 
-    // disable events
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) { if (isClickItem(e.getItemDrop().getItemStack())) e.setCancelled(true); }
 
     @EventHandler
+    public void onMoveItemEvent(InventoryMoveItemEvent e) { if (isClickItem(e.getItem())) e.setCancelled(true); }
+
+    @EventHandler
+    public void onDragItemEvent(InventoryDragEvent e) { if (isClickItem(e.getOldCursor())) e.setCancelled(true); }
+
+    @EventHandler
+    public void onHandSwap(PlayerSwapHandItemsEvent event) {
+        if ((event.getMainHandItem() != null && isClickItem(event.getMainHandItem())) || (event.getOffHandItem() != null && isClickItem(event.getOffHandItem()))) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         if (!(e.getWhoClicked() instanceof Player player)) return;
-        ItemStack clickedItem = e.getCurrentItem();
 
-        // Basic null checks
+        if (e.getClick() == ClickType.NUMBER_KEY) {
+            int hotbarButton = e.getHotbarButton();
+            ItemStack hotbarItem = player.getInventory().getItem(hotbarButton);
+            if (hotbarItem != null && isClickItem(hotbarItem)) {
+                e.setCancelled(true);
+                return;
+            }
+        }
+
+        if (e.getClick() == ClickType.SWAP_OFFHAND) {
+            ItemStack cursorItem = e.getCursor();
+            if (cursorItem != null && isClickItem(cursorItem)) {
+                e.setCancelled(true);
+                return;
+            }
+        }
+
+        ItemStack clickedItem = e.getCurrentItem();
         if (clickedItem == null || clickedItem.getType().isAir()) return;
 
         if (isClickItem(clickedItem)) { e.setCancelled(true); return; }
+        ItemStack cursorItem = e.getCursor();
+        if (cursorItem != null && isClickItem(cursorItem)) { e.setCancelled(true); return; }
 
         // Check if in one of our GUIs
         String title = e.getView().getTitle();
@@ -371,6 +402,7 @@ public class ClickerGuiUtil implements Listener {
             } else if (clickedItem.isSimilar(prestigePointUpgradeItem)) {
                 openPrestigePointUpgradeGui(player);
             } else {
+                if (e.getClick() != ClickType.LEFT && e.getClick() != ClickType.RIGHT) return;
                 playerClicked(player);
             }
             return;
@@ -438,8 +470,12 @@ public class ClickerGuiUtil implements Listener {
                 userUpgrade.setLevel(userUpgrade.getLevel() + 1);
                 userUpgrade.setCost(cost * userUpgrade.getCost_multi());
                 userUpgrade.setMultiplier(userUpgrade.getMultiplier() + userUpgrade.getIncrement_multi());
+
+                pl.tutorial.userManager.logAction(player, StepType.UPGRADE, 1.0);
             } else if (e.getClick() == ClickType.RIGHT) {
+                double count = 0.0;
                 while (canAfford) {
+                    count += 1.0;
                     if (userUpgrade.getLevel() >= userUpgrade.getMax_level()) {
                         break;
                     }
@@ -464,6 +500,7 @@ public class ClickerGuiUtil implements Listener {
                         default -> false;
                     };
                 }
+                pl.tutorial.userManager.logAction(player, StepType.UPGRADE, count);
             }
 
 

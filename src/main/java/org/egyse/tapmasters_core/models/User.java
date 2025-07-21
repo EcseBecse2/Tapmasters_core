@@ -46,7 +46,8 @@ public class User {
         this.token = token;
         this.prestige = prestige;
         this.prestigePoint = prestigePoint;
-        this.upgrades = pl.default_upg;
+        this.upgrades = new ArrayList<>();
+        for (Upgrade t : pl.default_upg) { upgrades.add(new Upgrade(t, true)); }
         this.boosters = new ArrayList<>();
     }
 

@@ -10,6 +10,8 @@ import org.egyse.tapmasters_core.Tapmasters_core;
 import org.egyse.tapmasters_core.models.Booster;
 import org.egyse.tapmasters_core.models.Currency;
 import org.egyse.tapmasters_core.models.User;
+import org.egyse.tapmasters_tutorial.Tapmasters_tutorial;
+import org.egyse.tapmasters_tutorial.models.StepType;
 import org.jetbrains.annotations.NotNull;
 
 public class SellCommand implements CommandExecutor {
@@ -74,6 +76,8 @@ public class SellCommand implements CommandExecutor {
                     ,
                     false);
         }
+
+        pl.tutorial.userManager.logAction(player, StepType.SELL_CLICK, 1.0);
 
         return true;
     }

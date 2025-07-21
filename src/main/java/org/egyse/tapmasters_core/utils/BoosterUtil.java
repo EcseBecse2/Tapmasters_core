@@ -99,7 +99,11 @@ public class BoosterUtil implements Listener {
             if (globalBooster != null) {
                 globalBooster.setTimer(globalBooster.getTimer() - 1);
                 if (globalBooster.getTimer() <= 0) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        pl.sendMessage(p, "&cThe global booster just ended", true);
+                    }
                     globalBooster = null;
+                    pl.dataManager.setGlobalBooster(null);
                 }
             }
         }, 20L, 20L);

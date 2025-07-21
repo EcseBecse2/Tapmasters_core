@@ -46,6 +46,10 @@ public class SellClickEvent extends Event {
         return player;
     }
 
+    public double getBaseClicks() {
+        return baseClicks;
+    }
+
     public List<Double> getMoneyMultipliers() {
         return this.moneyMultipliers;
     }

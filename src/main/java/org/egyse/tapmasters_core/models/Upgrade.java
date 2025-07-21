@@ -27,8 +27,9 @@ public class Upgrade {
         this.max_level = max_level;
     }
 
-    public Upgrade(Upgrade other) {
-        this.uuid = other.uuid;
+    public Upgrade(Upgrade other, boolean newUuid) {
+        if (!newUuid) this.uuid = other.uuid;
+        else this.uuid = UUID.randomUUID();
         this.multiplied = other.multiplied;
         this.level = other.level;
         this.base_cost = other.base_cost;

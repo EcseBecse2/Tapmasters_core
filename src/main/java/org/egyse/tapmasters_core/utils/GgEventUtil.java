@@ -27,7 +27,9 @@ public class GgEventUtil implements Listener {
         timeStop();
 
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&5&lGG&f's in the chat!"));
+            for (String l : pl.getConfig().getStringList("gg-event")) {
+                pl.sendCenteredMessage(p, ChatColor.translateAlternateColorCodes('&', l));
+            }
         }
     }
 

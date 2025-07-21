@@ -4,6 +4,7 @@ main: org.egyse.tapmasters_core.Tapmasters_core
 api-version: '1.19'
 softdepend:
   - PlaceholderAPI
+  - Tapmasters_tutorial
 commands:
   tapmaster:
     aliases:
@@ -18,4 +19,6 @@ commands:
     aliases:
       - boosters
   prestige:
+    aliases: []
+  ggevent:
     aliases: []

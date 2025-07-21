@@ -12,6 +12,7 @@ C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\utils\Curren
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\models\User.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\utils\TimerUtil.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\commands\PrestigeCommand.java
+C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\commands\GGEventCommand.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\utils\ClickerGuiUtil.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\utils\PrestigeUtil.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\utils\LeaderBoardUtil.java
@@ -22,6 +23,7 @@ C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\listeners\Qu
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\data\LocalDataManager.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\models\Currency.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\utils\BoosterUtil.java
+C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\models\DefaultFontInfo.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\API\events\ClickEvent.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\API\events\SellClickEvent.java
 C:\pluginok\Tapmasters_core\src\main\java\org\egyse\tapmasters_core\listeners\JoinListener.java

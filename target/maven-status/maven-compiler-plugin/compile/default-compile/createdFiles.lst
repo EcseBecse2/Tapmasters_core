@@ -22,6 +22,7 @@ org\egyse\tapmasters_core\models\Currency$5.class
 org\egyse\tapmasters_core\models\Currency$2.class
 org\egyse\tapmasters_core\utils\LeaderBoardUtil$1.class
 org\egyse\tapmasters_core\commands\AccountCommand.class
+org\egyse\tapmasters_core\commands\GGEventCommand.class
 org\egyse\tapmasters_core\models\GGEvent.class
 org\egyse\tapmasters_core\utils\GgEventUtil.class
 org\egyse\tapmasters_core\commands\TapmasterCommand.class
@@ -35,6 +36,7 @@ org\egyse\tapmasters_core\models\Currency$4.class
 org\egyse\tapmasters_core\API\events\SellClickEvent.class
 org\egyse\tapmasters_core\data\DataManager.class
 org\egyse\tapmasters_core\models\Currency$6.class
+org\egyse\tapmasters_core\models\DefaultFontInfo.class
 org\egyse\tapmasters_core\commands\TapmasterCommand$1.class
 org\egyse\tapmasters_core\commands\BoosterCommand.class
 org\egyse\tapmasters_core\data\UserManager$1.class

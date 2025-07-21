@@ -2,6 +2,12 @@
 data:
   auto-save: 120 # in seconds
 
+gg-event:
+  - "&f"
+  - "&3&lGGEVENT"
+  - "&fGG's in the chat for a &b&lrewward&f"
+  - "&f"
+
 messages:
   prefix: "&6&lTAPMASTERS &8&l▸ &f"
   player-only: "&cThis command is player-only."
@@ -22,6 +28,7 @@ messages:
   invalid-timer: "&cThe timer must be given in seconds, and greater than 0."
   given-booster: "&fYou successfully gave a {currency} &fbooster to {player}&f."
   got-booster: "&fYou &aGOT &fa {currency} &fbooster!"
+  got-infinite-booster: "&fYou &aGOT &fan infinite booster!"
   admin-give: "&fYou just gave &e{num} {currency} &fto &e{player}"
   admin-take: "&fYou just took &e{num} {currency} &ffrom &e{player}"
   admin-set: "&fYou just set &e{player}&f's {currency} &fto &e{num}"
@@ -68,4 +75,7 @@ messages:
     - "&f/tapmasters admin boosters <player>"
     - ""
     - "&f/booster give <player> <personal/global> <currency> <multiplier> <seconds>"
+    - "&f/booster start <currency> <multiplier> <seconds> - global booster"
+    - ""
+    - "&f/ggevent start"
     - ""

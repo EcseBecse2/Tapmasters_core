@@ -78,7 +78,17 @@ public class TapmasterCommand implements CommandExecutor {
                                     .replace("{global}", global),
                             false);
                 }
-            }else { for (String line : pl.getConfig().getStringList("messages.help")) pl.sendMessage(commandSender, line, false); }
+            } else if (strings[0].equalsIgnoreCase("reload")) {
+                if (commandSender instanceof Player p) {
+                    if (!p.isOp()) {
+                        pl.sendMessage(commandSender, pl.getConfig().getString("messages.no-perm"), true);
+                        return true;
+                    }
+                }
+
+                pl.reload();
+                pl.sendMessage(commandSender, "&aSuccessfully reloaded!", true);
+            } else { for (String line : pl.getConfig().getStringList("messages.help")) pl.sendMessage(commandSender, line, false); }
         } else if (strings.length == 3) {
 
             if (!strings[0].equalsIgnoreCase("admin")) { for (String line : pl.getConfig().getStringList("messages.help")) pl.sendMessage(commandSender, line, false); return true; }
@@ -153,7 +163,8 @@ public class TapmasterCommand implements CommandExecutor {
             }
 
             User user = null;
-            if (Bukkit.getPlayer(strings[2]) != null) { user = pl.localDataManager.getOnlineUser(Bukkit.getPlayer(strings[2]).getUniqueId()); }
+            Player p = Bukkit.getPlayer(strings[2]);
+            if (p != null) { user = pl.localDataManager.getOnlineUser(p.getUniqueId()); }
 
             if (user == null) {
                 pl.sendMessage(commandSender, pl.getConfig().getString("messages.player-not-online"), true);
@@ -191,6 +202,12 @@ public class TapmasterCommand implements CommandExecutor {
 
                             user.setClick(newValue);
 
+                            pl.sendMessage(p,
+                                    "&fYou just received &a{num} {currency}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
+
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-give")
                                             .replace("{player}", user.getName())
                                             .replace("{num}", pl.currencyFormatter.formatCurrency(num))
@@ -205,6 +222,12 @@ public class TapmasterCommand implements CommandExecutor {
                             }
 
                             user.setMoney(newValue);
+
+                            pl.sendMessage(p,
+                                    "&fYou just received &a{num} {currency}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
 
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-give")
                                             .replace("{player}", user.getName())
@@ -221,6 +244,12 @@ public class TapmasterCommand implements CommandExecutor {
 
                             user.setGem(newValue);
 
+                            pl.sendMessage(p,
+                                    "&fYou just received &a{num} {currency}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
+
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-give")
                                             .replace("{player}", user.getName())
                                             .replace("{num}", pl.currencyFormatter.formatCurrency(num))
@@ -236,6 +265,12 @@ public class TapmasterCommand implements CommandExecutor {
 
                             user.setToken(newValue);
 
+                            pl.sendMessage(p,
+                                    "&fYou just received &a{num} {currency}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
+
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-give")
                                             .replace("{player}", user.getName())
                                             .replace("{num}", pl.currencyFormatter.formatCurrency(num))
@@ -250,6 +285,12 @@ public class TapmasterCommand implements CommandExecutor {
                             }
 
                             user.setPrestigePoint(newValue);
+
+                            pl.sendMessage(p,
+                                    "&fYou just received &a{num} {currency}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
 
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-give")
                                             .replace("{player}", user.getName())
@@ -343,6 +384,12 @@ public class TapmasterCommand implements CommandExecutor {
                         case CLICK -> {
                             user.setClick(num);
 
+                            pl.sendMessage(p,
+                                    "&fYour {currency} &fhas been set to &a{num}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
+
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-set")
                                             .replace("{player}", user.getName())
                                             .replace("{num}", pl.currencyFormatter.formatCurrency(num))
@@ -351,6 +398,12 @@ public class TapmasterCommand implements CommandExecutor {
                         }
                         case MONEY -> {
                             user.setMoney(num);
+
+                            pl.sendMessage(p,
+                                    "&fYour {currency} &fhas been set to &a{num}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
 
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-set")
                                             .replace("{player}", user.getName())
@@ -361,6 +414,12 @@ public class TapmasterCommand implements CommandExecutor {
                         case GEM -> {
                             user.setGem(num);
 
+                            pl.sendMessage(p,
+                                    "&fYour {currency} &fhas been set to &a{num}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
+
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-set")
                                             .replace("{player}", user.getName())
                                             .replace("{num}", pl.currencyFormatter.formatCurrency(num))
@@ -370,6 +429,12 @@ public class TapmasterCommand implements CommandExecutor {
                         case TOKEN -> {
                             user.setToken(num);
 
+                            pl.sendMessage(p,
+                                    "&fYour {currency} &fhas been set to &a{num}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
+
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-set")
                                             .replace("{player}", user.getName())
                                             .replace("{num}", pl.currencyFormatter.formatCurrency(num))
@@ -378,6 +443,12 @@ public class TapmasterCommand implements CommandExecutor {
                         }
                         case PRESTIGE_POINT -> {
                             user.setPrestigePoint(num);
+
+                            pl.sendMessage(p,
+                                    "&fYour {currency} &fhas been set to &a{num}&f."
+                                            .replace("{num}", pl.currencyFormatter.formatCurrency(num))
+                                            .replace("{currency}", currency.toString())
+                                    , true);
 
                             pl.sendMessage(commandSender, pl.getConfig().getString("messages.admin-set")
                                             .replace("{player}", user.getName())

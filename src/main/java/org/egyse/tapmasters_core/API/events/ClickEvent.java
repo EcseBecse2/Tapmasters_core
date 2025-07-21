@@ -18,7 +18,7 @@ public class ClickEvent extends Event {
 
     // Chances (default to 1.0)
     private double gemChance = 1.0;
-    private double tokenChance = 0.01;
+    private double tokenChance = 0.75;
 
     public ClickEvent(Player player) {
         this.player = player;

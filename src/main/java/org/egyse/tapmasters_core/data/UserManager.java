@@ -226,32 +226,15 @@ public class UserManager implements DataManager {
     }
 
     public void setGlobalBooster(Booster booster) {
-        if (booster == null) return;
-        System.out.println("saving global booster");
         try (PreparedStatement stmt = connection.prepareStatement(
                 "UPDATE global_data SET booster = ? WHERE id = 1")) {
 
-            //System.out.println("setting string");
-            stmt.setString(1, gson.toJson(booster));
-            //System.out.println("executing update");
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            //System.out.println("failed setting global booster");
-            e.printStackTrace();
-        }
-
-        try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT booster FROM global_data WHERE id = 1")) {
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    String boosterJson = rs.getString("booster");
-                    System.out.println(boosterJson);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (booster == null) {
+                stmt.setNull(1, Types.VARCHAR); // Set to NULL in the database
+            } else {
+                stmt.setString(1, gson.toJson(booster));
             }
-            //System.out.println("failed getting global booster");
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

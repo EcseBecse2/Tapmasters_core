@@ -15,6 +15,8 @@ import org.egyse.tapmasters_core.listeners.JoinListener;
 import org.egyse.tapmasters_core.listeners.QuitListener;
 import org.egyse.tapmasters_core.models.*;
 import org.egyse.tapmasters_core.utils.*;
+import org.egyse.tapmasters_tutorial.Tapmasters_tutorial;
+import org.egyse.tapmasters_tutorial.models.StepType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,19 +30,19 @@ public final class Tapmasters_core extends JavaPlugin {
                     new Upgrade(Currency.CLICK, 1, 50, 50, 1.5, Currency.MONEY, 1, 0.2, 25),
                     new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.MONEY, 1, 0.5, 75),
                     new Upgrade(Currency.CLICK, 1, 500, 500, 2.25, Currency.MONEY, 1, 1, 150),
-                    new Upgrade(Currency.CLICK, 1, 1500, 1500, 2.25, Currency.MONEY, 1, 1.5, 200),
-                    new Upgrade(Currency.CLICK, 1, 3000, 3000, 3, Currency.MONEY, 1, 2, 300),
+                    new Upgrade(Currency.CLICK, 1, 1500, 1500, 2.25, Currency.MONEY, 1, 1.5, 250),
+                    new Upgrade(Currency.CLICK, 1, 3000, 3000, 3, Currency.MONEY, 1, 2, 5000),
                     new Upgrade(Currency.CLICK, 1, 50, 50, 1.5, Currency.GEM, 1, 2, 50),
-                    new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.GEM, 1, 3, 100),
-                    new Upgrade(Currency.CLICK, 1, 750, 750, 2.5, Currency.GEM, 1, 4, 150),
+                    new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.GEM, 1, 3, 150),
+                    new Upgrade(Currency.CLICK, 1, 750, 750, 2.5, Currency.GEM, 1, 4, 250),
                     new Upgrade(Currency.CLICK, 1, 1, 1, 1.25, Currency.PRESTIGE_POINT, 1, 2, 300),
-                    new Upgrade(Currency.GEM, 1, 250, 250, 2, Currency.MONEY, 1, 2, 25),
-                    new Upgrade(Currency.GEM, 1, 1000, 1000, 1.5, Currency.MONEY, 1, 2.5, 100),
-                    new Upgrade(Currency.GEM, 1, 50, 50, 2.5, Currency.GEM, 1, 1.5, 250),
-                    new Upgrade(Currency.GEM, 1, 1, 1, 2, Currency.PRESTIGE_POINT, 1, 2, 150),
+                    new Upgrade(Currency.GEM, 1, 250, 250, 2, Currency.MONEY, 1, 2, 50),
+                    new Upgrade(Currency.GEM, 1, 1000, 1000, 1.5, Currency.MONEY, 1, 2.5, 500),
+                    new Upgrade(Currency.GEM, 1, 50, 50, 2.5, Currency.GEM, 1, 1.5, 300),
+                    new Upgrade(Currency.GEM, 1, 1, 1, 2, Currency.PRESTIGE_POINT, 1, 2, 200),
                     new Upgrade(Currency.GEM, 1, 3, 3, 1.5, Currency.PRESTIGE_POINT, 1, 4, 100),
                     new Upgrade(Currency.PRESTIGE_POINT, 1, 1, 1, 1.5, Currency.PRESTIGE_POINT, 1, 1.5, 25),
-                    new Upgrade(Currency.PRESTIGE_POINT, 1, 1, 1, 2.5, Currency.PRESTIGE_POINT, 1, 2, 150)
+                    new Upgrade(Currency.PRESTIGE_POINT, 1, 1, 1, 2.5, Currency.PRESTIGE_POINT, 1, 2, 250)
             )
     );
 
@@ -49,14 +51,14 @@ public final class Tapmasters_core extends JavaPlugin {
                     new Upgrade(Currency.CLICK, 1, 50, 50, 1.5, Currency.MONEY, 1, 0.2, 25),
                     new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.MONEY, 1, 0.5, 75),
                     new Upgrade(Currency.CLICK, 1, 500, 500, 2.25, Currency.MONEY, 1, 1, 150),
-                    new Upgrade(Currency.CLICK, 1, 1500, 1500, 2.25, Currency.MONEY, 1, 1.5, 200),
-                    new Upgrade(Currency.CLICK, 1, 3000, 3000, 3, Currency.MONEY, 1, 2, 300),
+                    new Upgrade(Currency.CLICK, 1, 1500, 1500, 2.25, Currency.MONEY, 1, 1.5, 250),
+                    new Upgrade(Currency.CLICK, 1, 3000, 3000, 3, Currency.MONEY, 1, 2, 5000),
                     new Upgrade(Currency.CLICK, 1, 50, 50, 1.5, Currency.GEM, 1, 2, 50),
-                    new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.GEM, 1, 3, 100),
-                    new Upgrade(Currency.CLICK, 1, 750, 750, 2.5, Currency.GEM, 1, 4, 150),
-                    new Upgrade(Currency.GEM, 1, 250, 250, 2, Currency.MONEY, 1, 2, 25),
-                    new Upgrade(Currency.GEM, 1, 1000, 1000, 1.5, Currency.MONEY, 1, 2.5, 100),
-                    new Upgrade(Currency.GEM, 1, 50, 50, 2.5, Currency.GEM, 1, 1.5, 250)
+                    new Upgrade(Currency.CLICK, 1, 250, 250, 2, Currency.GEM, 1, 3, 150),
+                    new Upgrade(Currency.CLICK, 1, 750, 750, 2.5, Currency.GEM, 1, 4, 250),
+                    new Upgrade(Currency.GEM, 1, 250, 250, 2, Currency.MONEY, 1, 2, 50),
+                    new Upgrade(Currency.GEM, 1, 1000, 1000, 1.5, Currency.MONEY, 1, 2.5, 500),
+                    new Upgrade(Currency.GEM, 1, 50, 50, 2.5, Currency.GEM, 1, 1.5, 300)
             )
     );
 
@@ -70,6 +72,8 @@ public final class Tapmasters_core extends JavaPlugin {
     public GgEventUtil ggEventUtil;
     public PlaceholderAPIUtil placeholderAPIUtil;
     public LeaderBoardUtil leaderBoardUtil;
+
+    public Tapmasters_tutorial tutorial;
 
     @Override
     public void onEnable() {
@@ -99,10 +103,15 @@ public final class Tapmasters_core extends JavaPlugin {
         getCommand("sell").setExecutor(new SellCommand());
         getCommand("booster").setExecutor(new BoosterCommand());
         getCommand("prestige").setExecutor(new PrestigeCommand());
+        getCommand("ggevent").setExecutor(new GGEventCommand());
 
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             placeholderAPIUtil.register();
             System.out.println("Placeholders registered.");
+        }
+
+        if (getServer().getPluginManager().isPluginEnabled("Tapmasters_tutorial")) {
+            tutorial = Tapmasters_tutorial.getInstance();
         }
 
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
@@ -129,7 +138,7 @@ public final class Tapmasters_core extends JavaPlugin {
     public void autoSaveData() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             localDataManager.saveToDatabase(false);
-        }, 300L, getConfig().getInt("data.auto-save") * 20L);
+        }, 20L, getConfig().getInt("data.auto-save") * 20L);
     }
 
     public void sendMessage(CommandSender sender, String message, boolean includePrefix) {
@@ -156,6 +165,49 @@ public final class Tapmasters_core extends JavaPlugin {
         }
 
         return newInv;
+    }
+
+    private final static int CENTER_PX = 154;
+
+    public void sendCenteredMessage(Player player, String message){
+        if(message == null || message.equals("")) player.sendMessage("");
+        message = ChatColor.translateAlternateColorCodes('&', message);
+
+        int messagePxSize = 0;
+        boolean previousCode = false;
+        boolean isBold = false;
+
+        for(char c : message.toCharArray()){
+            if(c == '§'){
+                previousCode = true;
+                continue;
+            }else if(previousCode == true){
+                previousCode = false;
+                if(c == 'l' || c == 'L'){
+                    isBold = true;
+                    continue;
+                }else isBold = false;
+            }else{
+                DefaultFontInfo dFI = DefaultFontInfo.getDefaultFontInfo(c);
+                messagePxSize += isBold ? dFI.getBoldLength() : dFI.getLength();
+                messagePxSize++;
+            }
+        }
+
+        int halvedMessageSize = messagePxSize / 2;
+        int toCompensate = CENTER_PX - halvedMessageSize;
+        int spaceLength = DefaultFontInfo.SPACE.getLength() + 1;
+        int compensated = 0;
+        StringBuilder sb = new StringBuilder();
+        while(compensated < toCompensate){
+            sb.append(" ");
+            compensated += spaceLength;
+        }
+        player.sendMessage(sb.toString() + message);
+    }
+
+    public void reload() {
+        reloadConfig();
     }
 
     public static Tapmasters_core getInstance() {

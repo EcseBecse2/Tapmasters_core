@@ -1,5 +1,6 @@
 package org.egyse.tapmasters_core.utils;
 
+import org.bukkit.Bukkit;
 import org.egyse.tapmasters_core.Tapmasters_core;
 import org.egyse.tapmasters_core.models.User;
 import org.bukkit.OfflinePlayer;
@@ -12,6 +13,8 @@ public class LeaderBoardUtil {
     private final Map<String, List<User>> leaderboards = new ConcurrentHashMap<>();
     private final Map<String, Map<UUID, Integer>> positionMaps = new ConcurrentHashMap<>();
     private Timer refreshTimer;
+    private final Long refreshIntervalMillis = 3 * 60 * 1000L;
+    private Long lastRefresh;
 
     private final Set<String> CURRENCIES = Set.of(
             "click", "rawclick", "money", "gem",
@@ -25,8 +28,9 @@ public class LeaderBoardUtil {
             @Override
             public void run() {
                 refreshAllLeaderboards();
+                lastRefresh = System.currentTimeMillis();
             }
-        }, 0, 3 * 60 * 20);
+        }, 0, refreshIntervalMillis);
     }
 
     public void stopRefreshTask() {
@@ -34,11 +38,24 @@ public class LeaderBoardUtil {
     }
 
     private void refreshAllLeaderboards() {
-        List<User> allUsers = pl.dataManager.getAllUsers();
-        CURRENCIES.forEach(currency -> {
-            List<User> sorted = sortUsers(currency, allUsers);
-            leaderboards.put(currency, sorted);
-            positionMaps.put(currency, createPositionMap(sorted));
+        Bukkit.getScheduler().runTaskAsynchronously(pl, () -> {
+            List<User> allUsers = pl.dataManager.getAllUsers();
+
+            Map<String, List<User>> newLeaderboards = new ConcurrentHashMap<>();
+            Map<String, Map<UUID, Integer>> newPositionMaps = new ConcurrentHashMap<>();
+
+            for (String currency : CURRENCIES) {
+                List<User> sorted = sortUsers(currency, allUsers);
+                newLeaderboards.put(currency, sorted);
+                newPositionMaps.put(currency, createPositionMap(sorted));
+            }
+
+            Bukkit.getScheduler().runTask(pl, () -> {
+                leaderboards.clear();
+                leaderboards.putAll(newLeaderboards);
+                positionMaps.clear();
+                positionMaps.putAll(newPositionMaps);
+            });
         });
     }
 
@@ -75,6 +92,14 @@ public class LeaderBoardUtil {
             return handlePositionBased(parts);
         } else if (parts.length == 3) {
             return handlePlayerBased(player, parts);
+        } else if (parts.length == 2 && parts[1].equals("refresh")) {
+            long currentTime = System.currentTimeMillis();
+            long nextRefreshTime = lastRefresh + refreshIntervalMillis;
+            long timeRemaining = nextRefreshTime - currentTime;
+
+            if (timeRemaining < 0) timeRemaining = 0;
+
+            return pl.timerUtil.formatTime(timeRemaining);
         }
         return "Invalid format";
     }
